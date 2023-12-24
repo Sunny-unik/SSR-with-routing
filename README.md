@@ -1,30 +1,27 @@
 <div align="center">
 
-# template-repository
+# SSR-with-routing
 
-> This is a template repository which simplifies initialization of repository from scratch.
+> This is repository build for learn server side routing on server side rendered react app.
 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/Sunny-unik/template-repository)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/Sunny-unik/ssr-with-routing)
 
 </div>
 
 ## Tech Stack
 
-- [TODO: Tech Stack]
+- Express as server
+- React for UI
 
 ## 🤝 Contributing
 
-We encourage you to contribute to [TODO: Repo Name]! All contributors are required to abide by our [Code of Conduct](/docs/Code-of-conduct.md). Please check out the [Contributing guide](/docs/Contributing.md) for guidelines about how to proceed with your contribution.
+We encourage you to contribute to [SSR-with-routing](https://github.com/sunny-unik/ssr-with-routing)! All contributors are required to abide by our [Code of Conduct](/docs/Code-of-conduct.md). Please check out the [Contributing guide](/docs/Contributing.md) for guidelines about how to proceed with your contribution.
 Feel free for start discussion.
 
 ## Project Setup
 
 For development setup read [getting started guide](/docs/Getting-started-guide.md)
 
-# Deployment
-
-This website is deployed on [TODO: Service link]
-
 ## ⚖️ LICENSE
 
-MIT © [Sunny-unik/template-repository](LICENSE)
+MIT © [Sunny-unik/SSR-with-routing](LICENSE)
