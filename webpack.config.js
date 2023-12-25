@@ -1,3 +1,5 @@
+const path = require("path");
+const webpack = require("webpack");
 const nodeExternals = require("webpack-node-externals");
 
 const serverConfig = {
@@ -10,9 +12,30 @@ const serverConfig = {
     publicPath: "/",
   },
   module: {
-    rules: [{ test: /\.(js)$/, use: "babel-loader" }],
+    rules: [{ test: /\.(js|jsx)$/, use: "babel-loader" }],
   },
-  mode: "development",
+  plugins: [
+    new webpack.DefinePlugin({
+      __isBrowser__: "true",
+    }),
+  ],
 };
 
-module.exports = [serverConfig];
+const clientConfig = {
+  entry: "./src/client/index.jsx",
+  output: {
+    path: path.resolve(__dirname, "dist/public"),
+    filename: "app.js",
+    publicPath: "/",
+  },
+  module: {
+    rules: [{ test: /\.(js|jsx)$/, use: "babel-loader" }],
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      __isBrowser__: "true",
+    }),
+  ],
+};
+
+module.exports = [serverConfig, clientConfig];
