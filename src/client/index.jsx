@@ -1,10 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { hydrateRoot } from "react-dom/client";
 import App from "./App.jsx";
 
-ReactDOM.hydrate(
+hydrateRoot(
+  document.getElementById("root"),
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+    <App name="Sunny" />
+  </React.StrictMode>
 );
