@@ -5,6 +5,6 @@ import App from "./App.jsx";
 hydrateRoot(
   document.getElementById("root"),
   <React.StrictMode>
-    <App name="Sunny" />
+    <App name={window.__INITIAL_DATA__} />
   </React.StrictMode>
 );

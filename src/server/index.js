@@ -5,6 +5,7 @@ import React from "react";
 import { renderToString } from "react-dom/server";
 import App from "../client/App.jsx";
 import path from "path";
+import serializeJavascript from "serialize-javascript";
 
 config();
 const app = express();
@@ -16,13 +17,17 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.get("/health", (_req, res) => res.send("OK"));
 
 app.get("*", (_req, res) => {
-  const markup = renderToString(<App />);
+  const name = "Sunny";
+  const markup = renderToString(<App name={name} />);
   res.send(`
         <!DOCTYPE html>
         <html>
           <head>
             <title>SSR with React</title>
-            <script src="app.js" async defer></script>
+            <script src="app.js" defer></script>
+            <script>
+                window.__INITIAL_DATA__ = ${serializeJavascript(name)}
+            </script>
           </head>
           <body>
             <div id="root">${markup}</div>
