@@ -6,6 +6,7 @@ import { renderToString } from "react-dom/server";
 import App from "../client/App.jsx";
 import path from "path";
 import serializeJavascript from "serialize-javascript";
+import { fetchPopularRepos } from "../shared/githubAPI.js";
 
 config();
 const app = express();
@@ -17,16 +18,16 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.get("/health", (_req, res) => res.send("OK"));
 
 app.get("*", (_req, res) => {
-  const name = "Sunny";
-  const markup = renderToString(<App name={name} />);
-  res.send(`
+  fetchPopularRepos().then((data) => {
+    const markup = renderToString(<App data={data} />);
+    res.send(`
         <!DOCTYPE html>
         <html>
           <head>
             <title>SSR with React</title>
             <script src="app.js" defer></script>
             <script>
-                window.__INITIAL_DATA__ = ${serializeJavascript(name)}
+                window.__INITIAL_DATA__ = ${serializeJavascript(data)}
             </script>
           </head>
           <body>
@@ -34,6 +35,7 @@ app.get("*", (_req, res) => {
           </body>
         </html>
       `);
+  });
 });
 
 app.listen(port, () => console.log("App is live on http://localhost:" + port));
