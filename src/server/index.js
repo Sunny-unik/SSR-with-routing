@@ -6,7 +6,9 @@ import { renderToString } from "react-dom/server";
 import App from "../client/App.jsx";
 import path from "path";
 import serializeJavascript from "serialize-javascript";
-import { fetchPopularRepos } from "../shared/githubAPI.js";
+import { matchPath } from "react-router-dom";
+import { StaticRouter } from "react-router-dom/server.js";
+import routes from "../shared/routes";
 
 config();
 const app = express();
@@ -17,9 +19,20 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 app.get("/health", (_req, res) => res.send("OK"));
 
-app.get("*", (_req, res) => {
-  fetchPopularRepos().then((data) => {
-    const markup = renderToString(<App data={data} />);
+app.get("*", (req, res) => {
+  const activeRoute =
+    routes.find((route) => matchPath(req.url, route.path)) || {};
+
+  const promise = activeRoute.fetchInitialData
+    ? activeRoute.fetchInitialData(req.path)
+    : Promise.resolve();
+
+  promise.then((data) => {
+    const markup = renderToString(
+      <StaticRouter location={req.url} context={{}}>
+        <App data={data} />
+      </StaticRouter>
+    );
     res.send(`
         <!DOCTYPE html>
         <html>
