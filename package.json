@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
+    "start": "node dist/server",
     "build": "webpack --mode=development",
     "dev": "concurrently \"webpack --mode=development -w\" \"nodemon dist/server\""
   },
