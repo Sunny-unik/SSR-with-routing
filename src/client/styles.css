@@ -3,3 +3,9 @@
   text-decoration: line-through;
   color: crimson;
 }
+
+.container {
+  width: 75%;
+  margin-inline: auto;
+  max-width: 1200px;
+}
