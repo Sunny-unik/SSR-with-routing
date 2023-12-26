@@ -38,7 +38,7 @@ app.get("*", (req, res) => {
         <html>
           <head>
             <title>SSR with React</title>
-            <script src="app.js" defer></script>
+            <script src="/app.js" defer></script>
             <script>
                 window.__INITIAL_DATA__ = ${compressedData}
             </script>

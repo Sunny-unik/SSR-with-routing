@@ -6,7 +6,7 @@ export default function App({ data }) {
   return (
     <Routes>
       {routes.map(({ path, component: C, ...rest }) => (
-        <Route key={path} path={path} element={<C {...rest} />} />
+        <Route key={path} path={path} element={<C {...rest} repos={data} />} />
       ))}
     </Routes>
   );
