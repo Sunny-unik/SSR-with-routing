@@ -20,17 +20,17 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.get("/health", (_req, res) => res.send("OK"));
 
 app.get("*", (req, res) => {
-  const activeRoute =
-    routes.find((route) => matchPath(req.url, route.path)) || {};
+  const activeRoute = routes.find((route) => matchPath(route, req.url)) || {};
 
   const promise = activeRoute.fetchInitialData
     ? activeRoute.fetchInitialData(req.path)
     : Promise.resolve();
 
   promise.then((data) => {
+    const compressedData = serializeJavascript(data);
     const markup = renderToString(
-      <StaticRouter location={req.url} context={{}}>
-        <App data={data} />
+      <StaticRouter location={req.url} context={data}>
+        <App data={compressedData} />
       </StaticRouter>
     );
     res.send(`
@@ -40,7 +40,7 @@ app.get("*", (req, res) => {
             <title>SSR with React</title>
             <script src="app.js" defer></script>
             <script>
-                window.__INITIAL_DATA__ = ${serializeJavascript(data)}
+                window.__INITIAL_DATA__ = ${compressedData}
             </script>
           </head>
           <body>
