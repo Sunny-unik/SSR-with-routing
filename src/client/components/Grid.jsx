@@ -3,25 +3,26 @@ import { useParams } from "react-router-dom";
 import { fetchPopularRepos } from "../../shared/githubAPI";
 
 export default function Grid(props) {
-  const lang = useParams().id;
-  const [data, setData] = useState({ repos: [], loading: true });
+  const { id: lang } = useParams();
+  const [data, setData] = useState({ repos: [], loading: true, lang });
 
   useEffect(() => {
     if (__isBrowser__) delete window.__INITIAL_DATA__;
-    if (!props.repos) fetchAndSetData();
+    if (!props.repos || data.lang !== lang) fetchAndSetData();
     else if (typeof props.repos === "string")
-      setData({ repos: JSON.parse(props.repos), loading: false });
-    else setData({ repos: props.repos, loading: false });
-  }, []);
+      setData({ repos: JSON.parse(props.repos), loading: false, lang });
+    else setData({ repos: props.repos, loading: false, lang });
+  }, [lang]);
 
   const fetchAndSetData = async () => {
     try {
+      setData({ repos: [], loading: true, lang });
       const repos = await fetchPopularRepos(lang);
       if (repos === null)
         throw new Error("Failed to fetch data from githubAPI");
-      setData({ repos, loading: false });
+      setData({ repos, loading: false, lang });
     } catch (error) {
-      setData({ repos: [], loading: false, error });
+      setData({ repos: [], loading: false, error, lang });
     }
   };
 
@@ -32,11 +33,13 @@ export default function Grid(props) {
       {data.loading ? (
         <h1>Loading...</h1>
       ) : (
-        data.repos?.map(({ name, owner, stargazers_count, html_url }) => (
-          <li key={name} style={{ margin: 30 }}>
-            <ul>
+        data.repos.map(({ name, owner, stargazers_count, html_url }) => (
+          <li key={name} style={{ margin: 30, listStyle: "none" }}>
+            <ul style={{ padding: "20px" }}>
               <li>
-                <a href={html_url}>{name}</a>
+                <a href={html_url} rel="noopener noreferrer" target="_blank">
+                  {name}
+                </a>
               </li>
               <li>@{owner.login}</li>
               <li>{stargazers_count} stars</li>
