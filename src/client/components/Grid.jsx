@@ -7,6 +7,7 @@ export default function Grid(props) {
   const [data, setData] = useState({ repos: [], loading: true });
 
   useEffect(() => {
+    if (__isBrowser__) delete window.__INITIAL_DATA__;
     if (!props.repos) fetchAndSetData();
     else if (typeof props.repos === "string")
       setData({ repos: JSON.parse(props.repos), loading: false });
@@ -20,7 +21,6 @@ export default function Grid(props) {
         throw new Error("Failed to fetch data from githubAPI");
       setData({ repos, loading: false });
     } catch (error) {
-      console.log(error);
       setData({ repos: [], loading: false, error });
     }
   };

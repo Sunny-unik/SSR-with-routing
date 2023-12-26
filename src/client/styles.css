@@ -1,5 +1,5 @@
 .activeLink {
   font-weight: bold;
-  text-decoration: dashed;
+  text-decoration: line-through;
   color: crimson;
 }

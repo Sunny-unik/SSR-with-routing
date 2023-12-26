@@ -20,16 +20,16 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.get("/health", (_req, res) => res.send("OK"));
 
 app.get("*", (req, res) => {
-  const activeRoute = routes.find((route) => matchPath(route, req.url)) || {};
-
-  const promise = activeRoute.fetchInitialData
-    ? activeRoute.fetchInitialData(req.path)
+  const activeRouteData =
+    routes.find((route) => matchPath(route, req.url)) || {};
+  const filledPromise = activeRouteData.fetchInitialData
+    ? activeRouteData.fetchInitialData(req.path)
     : Promise.resolve();
 
-  promise.then((data) => {
+  filledPromise.then((data) => {
     const compressedData = serializeJavascript(data);
     const markup = renderToString(
-      <StaticRouter location={req.url} context={data}>
+      <StaticRouter location={req.url}>
         <App data={compressedData} />
       </StaticRouter>
     );
