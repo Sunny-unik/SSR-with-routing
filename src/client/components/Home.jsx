@@ -9,6 +9,7 @@ export default function Home() {
     "php",
     "csharp",
     "c",
+    "lua",
     "rust",
   ];
   let languageIndex = 0;
@@ -34,6 +35,7 @@ export default function Home() {
 
   return (
     <div>
+      <br />
       <p>
         If you can't find your preferred language in this list then you can
         navigate by adding your language in url with followed by popular route.

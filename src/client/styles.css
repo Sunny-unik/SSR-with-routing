@@ -7,5 +7,14 @@
 .container {
   width: 75%;
   margin-inline: auto;
-  max-width: 1200px;
+  max-width: 1025px;
+}
+
+.homeLink {
+  text-align: end;
+  list-style: none;
+}
+
+.homeLink a {
+  text-decoration: none;
 }

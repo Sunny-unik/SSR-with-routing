@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <ul>
-      <li key="homeLink">
+      <li key="homeLink" className="homeLink">
         <NavLink className={addActiveLink} to={`/`}>
           Home
         </NavLink>
