@@ -18,3 +18,11 @@
 .homeLink a {
   text-decoration: none;
 }
+
+.text-center {
+  text-align: center;
+}
+
+li > a {
+  text-decoration: none;
+}
