@@ -18,15 +18,20 @@ export default function Grid(props) {
     try {
       setData({ repos: [], loading: true, lang });
       const repos = await fetchPopularRepos(lang);
-      if (repos === null)
-        throw new Error("Failed to fetch data from githubAPI");
+      if (!repos) throw new Error("Failed to fetch data from API");
       setData({ repos, loading: false, lang });
     } catch (error) {
       setData({ repos: [], loading: false, error, lang });
     }
   };
 
-  if (data.error) return <h3 align="center">Oops! Internal Server Error</h3>;
+  if (data.error)
+    return (
+      <div className="text-center">
+        <h2>Oops! Internal Server Error</h2>
+        <p>{data.error.message}</p>
+      </div>
+    );
 
   return (
     <ul style={{ display: "flex", flexWrap: "wrap" }}>
