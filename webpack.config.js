@@ -16,7 +16,7 @@ const serverConfig = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      __isBrowser__: "true",
+      __isBrowser__: "false",
     }),
   ],
 };
