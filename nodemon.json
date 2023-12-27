@@ -1,0 +1,7 @@
+{
+  "watch": ["src", "public"],
+  "ignore": ["src/**/*.test.ts", "src/**/*.test.js"],
+  "ext": "js,jsx,json",
+  "exec": "npm run copy:assets && node ./dist/server.js ",
+  "quiet": true
+}
