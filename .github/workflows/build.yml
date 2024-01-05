@@ -41,6 +41,5 @@ jobs:
           build_dir: dist
           target_branch: prod
           commit_message: generated build for vercel
-          dry_run: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

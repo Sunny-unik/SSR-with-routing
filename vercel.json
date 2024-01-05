@@ -1,27 +1,18 @@
 {
+  "name": "SSR-with-routing",
   "version": 2,
   "builds": [
-    { "src": "*.ico", "use": "@vercel/static" },
-    { "src": "public/(.*)", "use": "@vercel/static" },
-    { "src": "server.js", "use": "@vercel/node" }
+    { "src": "server.js", "use": "@vercel/node" },
+    { "src": "public/**", "use": "@vercel/static" }
   ],
-  "alias": "git-stars.vercel.app",
-  "installCommand": "npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
   "routes": [
-    { "handle": "filesystem" },
     {
-      "src": "/favicon.ico",
-      "dest": "public/favicon.ico"
+      "src": "/((?!.*\\.\\w+$).*)",
+      "dest": "/server.js"
     },
     {
-      "src": "/app.js",
-      "dest": "public/app.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "server.js"
+      "src": "/(.+\\.[a-z]+)$",
+      "dest": "/public/$1"
     }
   ]
 }
