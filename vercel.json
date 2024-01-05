@@ -5,6 +5,10 @@
     { "src": "public/(.*)", "use": "@vercel/static" },
     { "src": "server.js", "use": "@vercel/node" }
   ],
+  "alias": "git-stars.vercel.app",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "routes": [
     { "handle": "filesystem" },
     {
