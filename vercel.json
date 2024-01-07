@@ -18,7 +18,9 @@
   "git": {
     "deploymentEnabled": {
       "prod": true,
-      "*": false
+      "master": false,
+      "dev": false,
+      "patch": false
     }
   }
 }
