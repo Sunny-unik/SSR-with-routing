@@ -39,6 +39,7 @@ app.get("*", (req, res) => {
           <head>
             <title>SSR with React</title>
             <script src="/app.js" defer></script>
+            <link rel="icon" href="/favicon.ico" type="image/x-icon">
             <script>
                 window.__INITIAL_DATA__ = ${compressedData}
             </script>
