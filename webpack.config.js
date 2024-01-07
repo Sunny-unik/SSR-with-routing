@@ -32,6 +32,7 @@ const clientConfig = {
       { test: /\.css$/, use: ["style-loader", "css-loader"] },
     ],
   },
+  devtool: "source-map",
   plugins: [
     new webpack.DefinePlugin({
       __isBrowser__: "true",
